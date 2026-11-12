@@ -1,0 +1,23 @@
+[plugin]
+id = "dev.haunt.year-of-agents"
+name = "Year of agents"
+description = "A calendar heatmap of your finished agent turns in Haunt"
+version = "0.1.0"
+api = "0.5"
+entry = "target/wasm32-wasip2/release/haunt_plugin.wasm"
+license = "MIT"
+
+[capabilities]
+# Only the turn's end is counted; no event text is kept.
+events = ["agent.stop"]
+panel = true
+# Only for the local time zone, so days start at your midnight.
+timer = true
+
+[contributes]
+commands = [{ id = "show", title = "Year of agents" }]
+
+[settings]
+weeks = { type = "integer", default = 26, description = "Weeks shown, 1 to 53" }
+stats = { type = "bool", default = true, description = "Show total turns, streak and busiest day under the grid" }
+unverified = { type = "bool", default = false, description = "Also count turns from events without the tab's nonce, which anything in the terminal can forge" }
